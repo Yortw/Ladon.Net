@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>       
+	<id>Ladon.Net</id>
+        <version>1.0.0</version>
+        <title>Ladon.Net</title>
+        <authors>Troy Willmot</authors>
+        <owners>Yortw</owners>
+        <licenseUrl>https://github.com/Yortw/Ladon.Net/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/Yortw/Ladon.Net</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/Yortw/Ladon.Net/master/Icon.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A lightweight, low overhead, low ceremony, cross platform library for guarding against bad method inputs.</description>
+        <copyright>Copyright 2017</copyright>
+        <language>en-NZ</language>
+        <tags>ladon guard null</tags>
+    </metadata>
+    <files>
+        <file src="Ladon.NetStandard10\bin\Release\*.dll" target="lib\netstandard1.0" />
+        <file src="Ladon.NetStandard10\bin\Release\*.pdb" target="lib\netstandard1.0" />
+        <file src="Ladon.NetStandard10\bin\Release\*.xml" target="lib\netstandard1.0" />
+
+        <file src="Ladon.Net40\bin\Release\*.dll" target="lib\net40" />
+        <file src="Ladon.Net40\bin\Release\*.pdb" target="lib\net40" />
+        <file src="Ladon.Net40\bin\Release\*.xml" target="lib\net40" />        
+        
+        <file src="**\*.cs" target="src" />
+    </files>
+</package>
