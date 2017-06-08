@@ -25,7 +25,7 @@ namespace Ladon
 #endif
 		public static T? GuardNull<T>([ValidatedNotNull] this T? argument, string argumentName) where T : struct
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 
 			return argument;
 		}
@@ -43,8 +43,8 @@ namespace Ladon
 #endif
 		public static T? GuardNullOrZero<T>([ValidatedNotNull] this T? argument, string argumentName) where T : struct, IComparable
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
-			if (argument.Value.CompareTo(0) == 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName));
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
+			if (argument.Value.CompareTo(0) == 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName)));
 
 			return argument;
 		}
@@ -62,8 +62,8 @@ namespace Ladon
 #endif
 		public static T? GuardNullZeroOrNegative<T>([ValidatedNotNull] this T? argument, string argumentName) where T : struct, IComparable
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
-			if (argument.Value.CompareTo(0) <= 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeLessThanOrEqualToZero, argumentName));
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
+			if (argument.Value.CompareTo(0) <= 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeLessThanOrEqualToZero, argumentName)));
 
 			return argument;
 		}
@@ -82,7 +82,7 @@ namespace Ladon
 		public static T? GuardNegative<T>(this T? argument, string argumentName) where T : struct, IComparable
 		{
 			if (argument == null) return argument;
-			if (argument.Value.CompareTo(0) < 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeNegative, argumentName));
+			if (argument.Value.CompareTo(0) < 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeNegative, argumentName)));
 
 			return argument;
 		}
@@ -103,8 +103,8 @@ namespace Ladon
 		public static T? GuardRange<T>(this T? argument, string argumentName, T minimum, T maximum) where T : struct, IComparable
 		{
 			if (argument == null) return argument;
-			if (argument.Value.CompareTo(minimum) < 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum));
-			if (argument.Value.CompareTo(maximum) > 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum));
+			if (argument.Value.CompareTo(minimum) < 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum)));
+			if (argument.Value.CompareTo(maximum) > 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum)));
 
 			return argument;
 		}

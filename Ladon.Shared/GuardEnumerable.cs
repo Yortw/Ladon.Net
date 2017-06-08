@@ -24,8 +24,8 @@ namespace Ladon
 #endif
 		public static ICollection<T> GuardNullOrEmpty<T>([ValidatedNotNull] this ICollection<T> argument, string argumentName)
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
-			if (argument.Count == 0) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.EnumerableCannotBeEmpty, argumentName), argumentName);
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
+			if (argument.Count == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.EnumerableCannotBeEmpty, argumentName), argumentName));
 
 			return argument;
 		}
@@ -45,8 +45,8 @@ namespace Ladon
 #endif
 		public static T[] GuardNullOrEmpty<T>([ValidatedNotNull] this T[] argument, string argumentName)
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
-			if (argument.Length == 0) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.EnumerableCannotBeEmpty, argumentName), argumentName);
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
+			if (argument.Length == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.EnumerableCannotBeEmpty, argumentName), argumentName));
 
 			return argument;
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Ladon.Tests
 {
@@ -18,6 +19,7 @@ namespace Ladon.Tests
 			catch (ArgumentNullException ae)
 			{
 				Assert.AreEqual("test", ae.ParamName);
+				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
 			}
 		}
 
@@ -50,5 +52,25 @@ namespace Ladon.Tests
 			}
 		}
 
+		[TestMethod]
+		public void Guard_GuardClausesAreInlinedInReleaseMode()
+		{
+#if DEBUG
+			Assert.Inconclusive("This test should only be run in release builds as it relies on compiler optimizations.");
+#endif
+
+			object o = null;
+			try
+			{
+				o.GuardNull(nameof(o));
+			}
+			catch (ArgumentNullException ae)
+			{
+				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
+				var frames = ae.StackTrace.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+				Assert.IsFalse(frames.Where((f) => f.Contains("Ladon.Guard.GuardNull")).Any(), "GuardNull found in stack trace frame, method should have been inlined.");
+				Assert.IsTrue(frames.Length < 3);
+			}
+		}
 	}
 }

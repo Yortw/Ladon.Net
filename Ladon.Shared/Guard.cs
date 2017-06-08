@@ -25,7 +25,7 @@ namespace Ladon
 #endif
 		public static T GuardNull<T>([ValidatedNotNull] this T argument, string argumentName) where T : class
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
+			if (argument == null) ThrowException(new ArgumentNullException(argumentName));
 			
 			return argument;
 		}
@@ -48,10 +48,19 @@ namespace Ladon
 #endif
 		public static T GuardEquals<T>(this T argument, string argumentName, T forbiddenValue) where T : IEquatable<T>
 		{
-			if (argument != null && argument.Equals(forbiddenValue)) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName);
-			if ((argument == null && forbiddenValue == null)) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName);
+			if (argument != null && argument.Equals(forbiddenValue)) ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName));
+			if ((argument == null && forbiddenValue == null)) ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName));
 
 			return argument;
+		}
+
+		// Methods throwing exceptions are often (always?) not inlined. To allow
+		// inlining of the guard clauses themselves, throw from a sub method.
+		// Since the method is only called on the unhappy case, and it's static, 
+		// perf hit should be minimal.
+		internal static void ThrowException(Exception exception)
+		{
+			throw exception;
 		}
 	}
 }

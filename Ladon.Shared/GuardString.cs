@@ -23,8 +23,8 @@ namespace Ladon
 #endif
 		public static string GuardNullOrEmpty([ValidatedNotNull] this string argument, string argumentName)
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
-			if (argument.Length == 0) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringArgumentCannotBeEmpty, argumentName), argumentName);
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
+			if (argument.Length == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringArgumentCannotBeEmpty, argumentName), argumentName));
 
 			return argument;
 		}
@@ -43,9 +43,9 @@ namespace Ladon
 #endif
 		public static string GuardNullOrWhiteSpace([ValidatedNotNull] this string argument, string argumentName)
 		{
-			if (argument == null) throw new ArgumentNullException(argumentName);
-			if (argument.Length == 0) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringArgumentCannotBeEmpty, argumentName), argumentName);
-			if (String.IsNullOrWhiteSpace(argument)) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringCannotBeWhitespace, argumentName), argumentName);
+			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
+			if (argument.Length == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringArgumentCannotBeEmpty, argumentName), argumentName));
+			if (String.IsNullOrWhiteSpace(argument)) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringCannotBeWhitespace, argumentName), argumentName));
 
 			return argument;
 		}
@@ -64,7 +64,7 @@ namespace Ladon
 #endif
 		public static string GuardLength(this string argument, string argumentName, int maximumLength)
 		{
-			if ((argument?.Length ?? 0) > maximumLength) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringTooLong, argumentName, maximumLength), argumentName);
+			if ((argument?.Length ?? 0) > maximumLength) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringTooLong, argumentName, maximumLength), argumentName));
 
 			return argument;
 		}
@@ -85,7 +85,7 @@ namespace Ladon
 		public static string GuardLength(this string argument, string argumentName, int minimumLength, int maximumLength)
 		{
 			if (argument == null) return argument;
-			if (argument.Length < minimumLength || argument.Length > maximumLength) throw new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringLengthOutOfRange, argumentName, minimumLength, maximumLength), argumentName);
+			if (argument.Length < minimumLength || argument.Length > maximumLength) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringLengthOutOfRange, argumentName, minimumLength, maximumLength), argumentName));
 
 			return argument;
 		}

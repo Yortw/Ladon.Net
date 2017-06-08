@@ -25,7 +25,7 @@ namespace Ladon
 #endif
 		public static float GuardZero(this float argument, string argumentName)
 		{
-			if (argument == 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName));
+			if (argument == 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName)));
 
 			return argument;
 		}
@@ -43,7 +43,7 @@ namespace Ladon
 #endif
 		public static float GuardZeroOrNegative(this float argument, string argumentName)
 		{
-			if (argument <= 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeLessThanOrEqualToZero, argumentName));
+			if (argument <= 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeLessThanOrEqualToZero, argumentName)));
 
 			return argument;
 		}
@@ -61,7 +61,7 @@ namespace Ladon
 #endif
 		public static float GuardNegative(this float argument, string argumentName)
 		{
-			if (argument < 0) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeNegative, argumentName));
+			if (argument < 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeNegative, argumentName)));
 
 			return argument;
 		}
@@ -81,8 +81,8 @@ namespace Ladon
 #endif
 		public static float GuardRange(this float argument, string argumentName, float minimum, float maximum)
 		{
-			if (argument < minimum) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum));
-			if (argument > maximum) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum));
+			if (argument < minimum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum)));
+			if (argument > maximum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum)));
 
 			return argument;
 		}

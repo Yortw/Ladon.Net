@@ -22,7 +22,7 @@ namespace Ladon
 #endif
 		public static DateTimeOffset GuardMin(this DateTimeOffset argument, string argumentName)
 		{
-			if (argument == DateTimeOffset.MinValue) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName));
+			if (argument == DateTimeOffset.MinValue) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName)));
 
 			return argument;
 		}
@@ -76,8 +76,8 @@ namespace Ladon
 #endif
 		public static DateTimeOffset GuardRange(this DateTimeOffset argument, string argumentName, DateTimeOffset minimum, DateTimeOffset maximum)
 		{
-			if (argument < minimum) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum));
-			if (argument > maximum) throw new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum));
+			if (argument < minimum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum)));
+			if (argument > maximum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum)));
 
 			return argument;
 		}
