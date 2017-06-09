@@ -7,6 +7,8 @@ A lightweight, low overhead, low ceremony, cross platform library for guarding a
 
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Yortw/Ladon.Net/blob/master/LICENSE) 
 
+[![Build status](https://ci.appveyor.com/api/projects/status/waxmch4c6sm96vaa?svg=true)](https://ci.appveyor.com/project/Yortw/ladon-net)
+
 ## Philosophy
 
 * Light weight - the library should be small and cover all of the most common guard cases, without trying to cover every conceivable case. Common cases include null, 'empty', min/max/ranged restrictions, zero/negative values and explicitly forbidden values. The library binary should be small and free of other dependencies outside the core runtimes.
