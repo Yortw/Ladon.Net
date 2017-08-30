@@ -9,6 +9,8 @@ A lightweight, low overhead, low ceremony, cross platform library for guarding a
 
 [![Build status](https://ci.appveyor.com/api/projects/status/waxmch4c6sm96vaa?svg=true)](https://ci.appveyor.com/project/Yortw/ladon-net)
 
+[![NuGet Badge](https://buildstats.info/nuget/Ladon.Net)](https://www.nuget.org/packages/Ladon.Net/)
+
 ## Philosophy
 
 * Light weight - the library should be small and cover all of the most common guard cases, without trying to cover every conceivable case. Common cases include null, 'empty', min/max/ranged restrictions, zero/negative values and explicitly forbidden values. The library binary should be small and free of other dependencies outside the core runtimes.
@@ -30,8 +32,6 @@ Currently;
 
 * .Net Standard 1.0 
 * .Net 4.0+
-
-## Build Status
 
 ## How do I use it?
 
@@ -63,7 +63,7 @@ If you prefer or need to go old school, you can call the guard methods directly;
     }
 ```
 
-Finally, you can chain guard clauses together if you want in a semi-fluent style. Ladon guard clauses return the value that was validated, so this does not create any kind of fluent builder/wrapper object and keeps the code allocation free/low. Because the value is returned as it's native type (as opposed to boxing) where possible, other extension methods can be called on the result of a prior guard call, though the name must still be passed for every call, e.g.
+It is possible to chain guard clauses together if you want in a semi-fluent style. Ladon guard clauses return the value that was validated, so this does not create any kind of fluent builder/wrapper object and keeps the code allocation free/low. Because the value is returned as it's native type (as opposed to boxing) where possible, other extension methods can be called on the result of a prior guard call, though the name must still be passed for every call, e.g.
 
 ```c#
     using Ladon;
@@ -73,6 +73,22 @@ Finally, you can chain guard clauses together if you want in a semi-fluent style
         name.GuardNullOrWhiteSpace(nameof(name)).GuardLength(nameof(name), 100);
 
         return "Hello " + name;
+    }
+```
+
+Finally it is also possible to guard and assign as a single line/statement;
+
+```c#
+    using Ladon;
+
+    public class MyType
+    {
+        private string _Name;
+
+        public  MyType(string name)
+        {
+            _Name = name.GuardNullOrWhiteSpace(nameof(name)).GuardLength(nameof(name), 100);
+        }
     }
 ```
 
