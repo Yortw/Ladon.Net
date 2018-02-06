@@ -8,7 +8,7 @@
     <ProjectGuid>{F9996A9F-8395-4EDA-9881-CFAF58C8F35D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Ladon</RootNamespace>
-    <AssemblyName>Ladon.NetStandard10</AssemblyName>
+    <AssemblyName>Ladon</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE;SUPPORTS_AGGRESSIVEINLINING</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Ladon.NetStandard10.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Ladon.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\Ladon.Net.Ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
