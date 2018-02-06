@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -43,6 +43,46 @@ namespace Ladon.Tests
 			List<string> test = new List<string>(1);
 			test.Add("Test");
 			Assert.AreEqual(test, test.GuardNullOrEmpty(nameof(test)));
+		}
+
+
+
+		[TestMethod]
+		public void GuardEnumerable_GuardNullOrEmptyWithSubproperty_ThrowsOnNull()
+		{
+			try
+			{
+				List<string> test = null;
+				test.GuardNullOrEmpty(nameof(test), "Subproperty");
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentNullException ae)
+			{
+				Assert.AreEqual("test.Subproperty", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void GuardEnumerable_GuardNullOrEmptyWithSubproperty_ThrowsOnEmpty()
+		{
+			try
+			{
+				List<string> test = new List<string>(0);
+				test.GuardNullOrEmpty(nameof(test), "Subproperty");
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test.Subproperty", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void GuardEnumerable_GuardNullOrEmptyWithSubproperty_DoesNotThrowOnNonEmpty()
+		{
+			List<string> test = new List<string>(1);
+			test.Add("Test");
+			Assert.AreEqual(test, test.GuardNullOrEmpty(nameof(test), "Subproperty"));
 		}
 
 	}

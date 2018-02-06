@@ -55,7 +55,7 @@
     <Compile Include="GuardDoubleTests.cs" />
     <Compile Include="GuardDecimalTests.cs" />
     <Compile Include="GuardIntTests.cs" />
-    <Compile Include="GuardEnumerable.cs" />
+    <Compile Include="GuardEnumerableTests.cs" />
     <Compile Include="GuardStringTests.cs" />
     <Compile Include="GuardByteTests.cs" />
     <Compile Include="GuardTests.cs" />
