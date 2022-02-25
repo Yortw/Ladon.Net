@@ -73,51 +73,5 @@ namespace Ladon.Tests
 			}
 		}
 
-
-		[TestMethod]
-		public void Guard_GuardNullWithSubproperty_ThrowsOnNull()
-		{
-			try
-			{
-				object test = null;
-				test.GuardNull(nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentNullException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
-			}
-		}
-
-		[TestMethod]
-		public void Guard_GuardNullWithSubproperty_DoesNotThrowOnNonNull()
-		{
-			object test = new object();
-			Assert.AreEqual(test, test.GuardNull(nameof(test), "Subproperty"));
-		}
-
-		[TestMethod]
-		public void Guard_GuardEqualsWithSubproperty_DoesNotThrowOnNonEqual()
-		{
-			string test = "test me";
-			Assert.AreEqual(test, test.GuardEquals(nameof(test), "Subproperty", "not allowed"));
-		}
-
-		[TestMethod]
-		public void Guard_GuardEqualsWithSubproperty_ThrowsOnEquals()
-		{
-			try
-			{
-				string test = "not allowed";
-				test.GuardEquals("not allowed", nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
 	}
 }

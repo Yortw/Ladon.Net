@@ -51,46 +51,5 @@ namespace Ladon
 			return argument;
 		}
 
-		/// <summary>
-		/// Throws an appropriate exception if <paramref name="argument"/> is zero.
-		/// </summary>
-		/// <param name="argument">The value to check.</param>
-		/// <param name="argumentName">The name of the argument, passed as the paramName argument to the exception that is thrown.</param>
-		/// <param name="propertyName">The name of a child property of the argument referred to by <paramref name="argumentName"/> that is the property really being validated.</param>
-		/// <exception cref="System.ArgumentOutOfRangeException">Thrown if <paramref name="argument"/> is equal to zero.</exception>
-		/// <returns>The value of <paramref name="argument"/>, allowing guard clauses to be chained.</returns>
-		[ContractAbbreviator]
-#if SUPPORTS_AGGRESSIVEINLINING
-		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
-		public static byte GuardZero(this byte argument, string argumentName, string propertyName)
-		{
-			if (argument == 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName + "." + propertyName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName + "." + propertyName)));
-
-			return argument;
-		}
-
-		/// <summary>
-		/// Throws an appropriate exception if <paramref name="argument"/> is outside of the specified range.
-		/// </summary>
-		/// <param name="argument">The value to check.</param>
-		/// <param name="minimum">The smallest allowed value.</param>
-		/// <param name="maximum">The largest allowed value.</param>
-		/// <param name="argumentName">The name of the argument, passed as the paramName argument to the exception that is thrown.</param>
-		/// <param name="propertyName">The name of a child property of the argument referred to by <paramref name="argumentName"/> that is the property really being validated.</param>
-		/// <exception cref="System.ArgumentOutOfRangeException">Thrown if <paramref name="argument"/> is outside the range specified.</exception>
-		/// <returns>The value of <paramref name="argument"/>, allowing guard clauses to be chained.</returns>
-		[ContractAbbreviator]
-#if SUPPORTS_AGGRESSIVEINLINING
-		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
-		public static byte GuardRange(this byte argument, byte minimum, byte maximum, string argumentName, string propertyName)
-		{
-			if (argument < minimum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName + "." + propertyName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName + "." + propertyName, minimum)));
-			if (argument > maximum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName + "." + propertyName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName + "." + propertyName, maximum)));
-
-			return argument;
-		}
-
 	}
 }
