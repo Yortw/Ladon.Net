@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static float GuardZero(this float argument, string argumentName)
+		public static float GuardZero(this float argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument == 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName)));
 
@@ -41,7 +42,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static float GuardZeroOrNegative(this float argument, string argumentName)
+		public static float GuardZeroOrNegative(this float argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument <= 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeLessThanOrEqualToZero, argumentName)));
 
@@ -59,7 +60,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static float GuardNegative(this float argument, string argumentName)
+		public static float GuardNegative(this float argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument < 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeNegative, argumentName)));
 
@@ -79,7 +80,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static float GuardRange(this float argument, string argumentName, float minimum, float maximum)
+		public static float GuardRange(this float argument, float minimum, float maximum, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument < minimum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum)));
 			if (argument > maximum) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooLarge, argumentName, maximum)));

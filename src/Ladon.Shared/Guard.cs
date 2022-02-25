@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace Ladon
 {
@@ -23,7 +24,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T GuardNull<T>([ValidatedNotNull] this T argument, string argumentName) where T : class
+		public static T GuardNull<T>([ValidatedNotNull, NotNull] this T argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
 		{
 			if (argument == null) ThrowException(new ArgumentNullException(argumentName));
 			
@@ -43,7 +44,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T GuardNull<T>([ValidatedNotNull] this T argument, string argumentName, string propertyName) where T : class
+		public static T GuardNull<T>([ValidatedNotNull, NotNull] this T argument, string argumentName, string propertyName) where T : class
 		{
 			if (argument == null) ThrowException(new ArgumentNullException(argumentName + "." + propertyName));
 
@@ -58,15 +59,15 @@ namespace Ladon
 		/// </remarks>
 		/// <typeparam name="T">The type of value being checked.</typeparam>
 		/// <param name="argument">The value to check.</param>
-		/// <param name="argumentName">The name of the argument, passed as the paramName argument to the <see cref="ArgumentNullException(string, string)"/> constructor if the value is null.</param>
 		/// <param name="forbiddenValue">The value that is not allowed.</param>
+		/// <param name="argumentName">The name of the argument, passed as the paramName argument to the <see cref="ArgumentNullException(string, string)"/> constructor if the value is null.</param>
 		/// <exception cref="System.ArgumentException">Thrown if <paramref name="argument"/> is equal to <paramref name="forbiddenValue"/>.</exception>
 		/// <returns>The value of <paramref name="argument"/>, allowing guard clauses to be chained.</returns>
 		[ContractAbbreviator]
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T GuardEquals<T>(this T argument, string argumentName, T forbiddenValue) where T : IEquatable<T>
+		public static T GuardEquals<T>(this T argument, T forbiddenValue, [CallerArgumentExpression("argument")] string argumentName = "") where T : IEquatable<T>
 		{
 			if (argument != null && argument.Equals(forbiddenValue)) ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName));
 			if ((argument == null && forbiddenValue == null)) ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName));
@@ -82,16 +83,16 @@ namespace Ladon
 		/// </remarks>
 		/// <typeparam name="T">The type of value being checked.</typeparam>
 		/// <param name="argument">The value to check.</param>
+		/// <param name="forbiddenValue">The value that is not allowed.</param>
 		/// <param name="argumentName">The name of the argument, passed as the paramName argument to the <see cref="ArgumentNullException(string, string)"/> constructor if the value is null.</param>
 		/// <param name="propertyName">The name of a child property of the argument referred to by <paramref name="argumentName"/> that is the property really being validated.</param>
-		/// <param name="forbiddenValue">The value that is not allowed.</param>
 		/// <exception cref="System.ArgumentException">Thrown if <paramref name="argument"/> is equal to <paramref name="forbiddenValue"/>.</exception>
 		/// <returns>The value of <paramref name="argument"/>, allowing guard clauses to be chained.</returns>
 		[ContractAbbreviator]
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T GuardEquals<T>(this T argument, string argumentName, string propertyName, T forbiddenValue) where T : IEquatable<T>
+		public static T GuardEquals<T>(this T argument, T forbiddenValue, string argumentName, string propertyName) where T : IEquatable<T>
 		{
 			if (argument != null && argument.Equals(forbiddenValue)) ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName + "." + propertyName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName + "." + propertyName));
 			if ((argument == null && forbiddenValue == null)) ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.ValueNotAllowed, argumentName + "." + propertyName, forbiddenValue?.ToString() ?? Resources.NullPlaceholder), argumentName + "." + propertyName));

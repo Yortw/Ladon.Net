@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Ladon
@@ -22,7 +23,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static ICollection<T> GuardNullOrEmpty<T>([ValidatedNotNull] this ICollection<T> argument, string argumentName)
+		public static ICollection<T> GuardNullOrEmpty<T>([ValidatedNotNull] this ICollection<T> argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 			if (argument.Count == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.EnumerableCannotBeEmpty, argumentName), argumentName));
@@ -43,7 +44,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T[] GuardNullOrEmpty<T>([ValidatedNotNull] this T[] argument, string argumentName)
+		public static T[] GuardNullOrEmpty<T>([ValidatedNotNull] this T[] argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 			if (argument.Length == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.EnumerableCannotBeEmpty, argumentName), argumentName));

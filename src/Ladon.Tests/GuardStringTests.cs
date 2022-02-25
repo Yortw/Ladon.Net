@@ -99,14 +99,14 @@ namespace Ladon.Tests
 		public void GuardString_GuardLength_DoesNotThrowOnNull()
 		{
 			string test = null;
-			Assert.AreEqual(test, test.GuardLength(nameof(test), 10));
+			Assert.AreEqual(test, test.GuardLength(10, nameof(test)));
 		}
 
 		[TestMethod]
 		public void GuardString_GuardLength_DoesNotThrowUnderMaxLength()
 		{
 			string test = "test";
-			Assert.AreEqual(test, test.GuardLength(nameof(test), 10));
+			Assert.AreEqual(test, test.GuardLength(10, nameof(test)));
 		}
 
 		[TestMethod]
@@ -115,7 +115,7 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "test test test test test test";
-				Assert.AreEqual(test, test.GuardLength(nameof(test), 10));
+				Assert.AreEqual(test, test.GuardLength(10, nameof(test)));
 				Assert.Fail("Did not throw argument exception");
 			}
 			catch (ArgumentException ae)
@@ -130,7 +130,7 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "test test test test test test";
-				Assert.AreEqual(test, test.GuardLength(nameof(test), 5, 10));
+				Assert.AreEqual(test, test.GuardLength(5, 10, nameof(test)));
 				Assert.Fail("Did not throw argument exception");
 			}
 			catch (ArgumentException ae)
@@ -145,7 +145,7 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "t";
-				Assert.AreEqual(test, test.GuardLength(nameof(test), 5, 10));
+				Assert.AreEqual(test, test.GuardLength(5, 10, nameof(test)));
 				Assert.Fail("Did not throw argument exception");
 			}
 			catch (ArgumentException ae)
@@ -158,14 +158,14 @@ namespace Ladon.Tests
 		public void GuardString_GuardLengthRange_DoesNotThrowOnNull()
 		{
 			string test = null;
-			Assert.AreEqual(test, test.GuardLength(nameof(test), 5, 10));
+			Assert.AreEqual(test, test.GuardLength(5, 10, nameof(test)));
 		}
 
 		[TestMethod]
 		public void GuardString_GuardLengthRange_DoesNotThrowOnWhenLengthInRange()
 		{
 			string test = "test 123";
-			Assert.AreEqual(test, test.GuardLength(nameof(test), 5, 10));
+			Assert.AreEqual(test, test.GuardLength(5, 10, nameof(test)));
 		}
 
 

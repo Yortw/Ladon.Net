@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +25,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T? GuardNull<T>([ValidatedNotNull] this T? argument, string argumentName) where T : struct
+		public static T? GuardNull<T>([ValidatedNotNull, NotNull] this T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : struct
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 
@@ -41,7 +43,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T? GuardNullOrZero<T>([ValidatedNotNull] this T? argument, string argumentName) where T : struct, IComparable
+		public static T? GuardNullOrZero<T>([ValidatedNotNull, NotNull] this T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : struct, IComparable
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 			if (argument.Value.CompareTo(0) == 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeZero, argumentName)));
@@ -60,7 +62,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T? GuardNullZeroOrNegative<T>([ValidatedNotNull] this T? argument, string argumentName) where T : struct, IComparable
+		public static T? GuardNullZeroOrNegative<T>([ValidatedNotNull, NotNull] this T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : struct, IComparable
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 			if (argument.Value.CompareTo(0) <= 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeLessThanOrEqualToZero, argumentName)));
@@ -79,7 +81,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T? GuardNegative<T>(this T? argument, string argumentName) where T : struct, IComparable
+		public static T? GuardNegative<T>(this T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : struct, IComparable
 		{
 			if (argument == null) return argument;
 			if (argument.Value.CompareTo(0) < 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberCannotBeNegative, argumentName)));
@@ -100,7 +102,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static T? GuardRange<T>(this T? argument, string argumentName, T minimum, T maximum) where T : struct, IComparable
+		public static T? GuardRange<T>(this T? argument, T minimum, T maximum, [CallerArgumentExpression("argument")] string argumentName = "") where T : struct, IComparable
 		{
 			if (argument == null) return argument;
 			if (argument.Value.CompareTo(minimum) < 0) Guard.ThrowException(new ArgumentOutOfRangeException(argumentName, argument, String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.NumberTooSmall, argumentName, minimum)));

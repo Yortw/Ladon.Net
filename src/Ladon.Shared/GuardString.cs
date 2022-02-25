@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Ladon
@@ -21,7 +23,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static string GuardNullOrEmpty([ValidatedNotNull] this string argument, string argumentName)
+		public static string GuardNullOrEmpty([ValidatedNotNull, NotNull] this string argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 			if (argument.Length == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringArgumentCannotBeEmpty, argumentName), argumentName));
@@ -62,7 +64,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static string GuardNullOrWhiteSpace([ValidatedNotNull] this string argument, string argumentName)
+		public static string GuardNullOrWhiteSpace([ValidatedNotNull, NotNull] this string argument, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument == null) Guard.ThrowException(new ArgumentNullException(argumentName));
 			if (argument.Length == 0) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringArgumentCannotBeEmpty, argumentName), argumentName));
@@ -105,7 +107,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static string GuardLength(this string argument, string argumentName, int maximumLength)
+		public static string GuardLength(this string argument, int maximumLength, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if ((argument?.Length ?? 0) > maximumLength) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringTooLong, argumentName, maximumLength), argumentName));
 
@@ -146,7 +148,7 @@ namespace Ladon
 #if SUPPORTS_AGGRESSIVEINLINING
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
-		public static string GuardLength(this string argument, string argumentName, int minimumLength, int maximumLength)
+		public static string GuardLength(this string argument, int minimumLength, int maximumLength, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
 			if (argument == null) return argument;
 			if (argument.Length < minimumLength || argument.Length > maximumLength) Guard.ThrowException(new ArgumentException(String.Format(System.Globalization.CultureInfo.InvariantCulture, Resources.StringLengthOutOfRange, argumentName, minimumLength, maximumLength), argumentName));

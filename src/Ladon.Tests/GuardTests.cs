@@ -43,7 +43,7 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "not allowed";
-				test.GuardEquals(nameof(test), "not allowed");
+				test.GuardEquals("not allowed", nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentException ae)
@@ -110,7 +110,7 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "not allowed";
-				test.GuardEquals(nameof(test), "Subproperty", "not allowed");
+				test.GuardEquals("not allowed", nameof(test), "Subproperty");
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentException ae)

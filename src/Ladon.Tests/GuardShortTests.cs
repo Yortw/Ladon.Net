@@ -110,7 +110,7 @@ namespace Ladon.Tests
 			try
 			{
 				short test = 1;
-				test.GuardRange(nameof(test), 5, 10);
+				test.GuardRange(5, 10, nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentOutOfRangeException ae)
@@ -125,7 +125,7 @@ namespace Ladon.Tests
 			try
 			{
 				short test = 15;
-				test.GuardRange(nameof(test), 5, 10);
+				test.GuardRange(5, 10, nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentOutOfRangeException ae)
@@ -138,7 +138,7 @@ namespace Ladon.Tests
 		public void GuardShort_GuardRange_DoesNotThrowWithinRange()
 		{
 			short test = 8;
-			Assert.AreEqual(test, test.GuardRange(nameof(test), 5, 10));
+			Assert.AreEqual(test, test.GuardRange(5, 10, nameof(test)));
 		}
 
 
