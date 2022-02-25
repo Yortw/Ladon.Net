@@ -24,6 +24,22 @@ namespace Ladon.Tests
 		}
 
 		[TestMethod]
+		public void Guard_GuardNull_UsesCallerArgumentExpression()
+		{
+			try
+			{
+				object test = null;
+				test.GuardNull();
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentNullException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
+			}
+		}
+
+		[TestMethod]
 		public void Guard_GuardNull_DoesNotThrowOnNonNull()
 		{
 			object test = new object();
