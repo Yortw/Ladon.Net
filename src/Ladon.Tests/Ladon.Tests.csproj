@@ -65,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ladon.NetStandard10\Ladon.NetStandard10.csproj">
-      <Project>{f9996a9f-8395-4eda-9881-cfaf58c8f35d}</Project>
-      <Name>Ladon.NetStandard10</Name>
+    <ProjectReference Include="..\Ladon\Ladon.csproj">
+      <Project>{d3399188-d7a4-4b32-a898-6a6a45b65c6e}</Project>
+      <Name>Ladon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
