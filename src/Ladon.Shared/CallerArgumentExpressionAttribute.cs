@@ -5,6 +5,7 @@ using System.Text;
 
 namespace System.Runtime.CompilerServices
 {
+	[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 	[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
 	internal sealed class CallerArgumentExpressionAttribute : Attribute
 	{

@@ -69,6 +69,28 @@ namespace Ladon.Tests
 		}
 
 		[TestMethod]
+		public void Guard_GuardEquals_ThrowsOnNullWhenNullForbidden()
+		{
+			try
+			{
+				string test = null;
+				test.GuardEquals(null, nameof(test));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void Guard_GuardEquals_DoesNotThrowOnNotNullWhenNullForbidden()
+		{
+			string test = "test";
+			test.GuardEquals(null, nameof(test));
+		}
+
+		[TestMethod]
 		public void Guard_GuardClausesAreInlinedInReleaseMode()
 		{
 #if DEBUG

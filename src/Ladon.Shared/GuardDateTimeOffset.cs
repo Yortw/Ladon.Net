@@ -42,7 +42,7 @@ namespace Ladon
 #endif
 		public static DateTimeOffset GuardBefore(this DateTimeOffset argument, DateTimeOffset minimum, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
-			return GuardRange(argument, DateTimeOffset.MinValue, minimum, argumentName);
+			return GuardRange(argument, minimum, DateTimeOffset.MaxValue, argumentName);
 		}
 
 		/// <summary>

@@ -45,5 +45,43 @@ namespace Ladon.Tests
 			Assert.AreEqual(test, test.GuardNullOrEmpty(nameof(test)));
 		}
 
+
+		[TestMethod]
+		public void GuardEnumerable_GuardNullOrEmpty_ThrowsOnNullArray()
+		{
+			try
+			{
+				string[] test = null;
+				test.GuardNullOrEmpty(nameof(test));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentNullException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void GuardEnumerable_GuardNullOrEmpty_ThrowsOnEmptyArray()
+		{
+			try
+			{
+				string[] test = new string[] { };
+				test.GuardNullOrEmpty(nameof(test));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void GuardEnumerable_GuardNullOrEmpty_DoesNotThrowOnNonEmptyArray()
+		{
+			string[] test = new string[] { "test" };
+			Assert.AreEqual(test, test.GuardNullOrEmpty(nameof(test)));
+		}
+
 	}
 }

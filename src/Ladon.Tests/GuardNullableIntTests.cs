@@ -129,6 +129,13 @@ namespace Ladon.Tests
 
 
 		[TestMethod]
+		public void GuardNullableInt_GuardNegative_DoesNotThrowOnNull()
+		{
+			int? test = null;
+			Assert.AreEqual(test, test.GuardNegative(nameof(test)));
+		}
+
+		[TestMethod]
 		public void GuardNullableInt_GuardNegative_DoesNotThrowOnZero()
 		{
 			int? test = 0;
@@ -192,6 +199,13 @@ namespace Ladon.Tests
 		public void GuardNullableInt_GuardRange_DoesNotThrowWithinRange()
 		{
 			int? test = 8;
+			Assert.AreEqual(test, test.GuardRange(5, 10, nameof(test)));
+		}
+
+		[TestMethod]
+		public void GuardNullableInt_GuardRange_DoesNotThrowForNull()
+		{
+			int? test = null;
 			Assert.AreEqual(test, test.GuardRange(5, 10, nameof(test)));
 		}
 

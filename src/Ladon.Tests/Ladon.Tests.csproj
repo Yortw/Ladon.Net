@@ -48,6 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GuardDateTimeOffsetTests.cs" />
+    <Compile Include="GuardDateTimeTests.cs" />
     <Compile Include="GuardNullableIntTests.cs" />
     <Compile Include="GuardShortTests.cs" />
     <Compile Include="GuardLongTests.cs" />

@@ -42,7 +42,7 @@ namespace Ladon
 #endif
 		public static DateTime GuardBefore(this DateTime argument, DateTime minimum, [CallerArgumentExpression("argument")] string argumentName = "")
 		{
-			return GuardRange(argument, DateTime.MinValue, minimum, argumentName);
+			return GuardRange(argument, minimum, DateTime.MaxValue, argumentName);
 		}
 
 		/// <summary>

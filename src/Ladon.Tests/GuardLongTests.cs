@@ -75,32 +75,32 @@ namespace Ladon.Tests
 
 
 		[TestMethod]
-		public void GuardLong_GuardNegative_ThrowsOnZero()
+		public void GuardLong_GuardNegative_DoesNotThrowOnZero()
 		{
-			try
-			{
-				long test = 0;
-				test.GuardZero(nameof(test));
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentOutOfRangeException ae)
-			{
-				Assert.AreEqual("test", ae.ParamName);
-			}
+			long test = 0;
+			test.GuardNegative(nameof(test));
 		}
 
 		[TestMethod]
 		public void GuardLong_GuardNegative_DoesNotThrowOnPositiveValue()
 		{
 			long test = 1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test)));
+			Assert.AreEqual(test, test.GuardNegative(nameof(test)));
 		}
 
 		[TestMethod]
-		public void GuardLong_GuardNegative_DoesNotThrowOnNegative()
+		public void GuardLong_GuardNegative_ThrowsOnNegative()
 		{
 			long test = -1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test)));
+			try
+			{
+				Assert.AreEqual(test, test.GuardNegative(nameof(test)));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
 		}
 
 
