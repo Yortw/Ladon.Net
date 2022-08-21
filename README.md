@@ -5,11 +5,7 @@ A lightweight, low overhead, low ceremony, cross platform library for guarding a
 
 *[Ladon protects your golden apples](https://en.wikipedia.org/wiki/Ladon_(mythology))*
 
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Yortw/Ladon.Net/blob/master/LICENSE) 
-
-[![Build status](https://ci.appveyor.com/api/projects/status/waxmch4c6sm96vaa?svg=true)](https://ci.appveyor.com/project/Yortw/ladon-net)
-
-[![NuGet Badge](https://buildstats.info/nuget/Ladon.Net)](https://www.nuget.org/packages/Ladon.Net/)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Yortw/Ladon.Net/blob/master/LICENSE) [![Build status](https://ci.appveyor.com/api/projects/status/waxmch4c6sm96vaa?svg=true)](https://ci.appveyor.com/project/Yortw/ladon-net) [![NuGet Badge](https://buildstats.info/nuget/Ladon.Net)](https://www.nuget.org/packages/Ladon.Net/)
 
 ## Philosophy
 
@@ -30,8 +26,12 @@ A lightweight, low overhead, low ceremony, cross platform library for guarding a
 ## Supported Platforms
 Currently;
 
-* .Net Standard 1.0 
-* .Net 4.0+
+* .Net Standard 2.0
+* .Net Standard 2.1
+* .Net 4.5
+* .Net 4.6
+* .Net 5.0
+* .Net 6.0
 
 ## How do I use it?
 

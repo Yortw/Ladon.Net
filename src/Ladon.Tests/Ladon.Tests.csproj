@@ -48,6 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GuardDateTimeOffsetTests.cs" />
+    <Compile Include="GuardDateTimeTests.cs" />
     <Compile Include="GuardNullableIntTests.cs" />
     <Compile Include="GuardShortTests.cs" />
     <Compile Include="GuardLongTests.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="GuardDoubleTests.cs" />
     <Compile Include="GuardDecimalTests.cs" />
     <Compile Include="GuardIntTests.cs" />
-    <Compile Include="GuardEnumerable.cs" />
+    <Compile Include="GuardEnumerableTests.cs" />
     <Compile Include="GuardStringTests.cs" />
     <Compile Include="GuardByteTests.cs" />
     <Compile Include="GuardTests.cs" />
@@ -65,9 +67,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ladon.NetStandard10\Ladon.NetStandard10.csproj">
-      <Project>{f9996a9f-8395-4eda-9881-cfaf58c8f35d}</Project>
-      <Name>Ladon.NetStandard10</Name>
+    <ProjectReference Include="..\Ladon\Ladon.csproj">
+      <Project>{d3399188-d7a4-4b32-a898-6a6a45b65c6e}</Project>
+      <Name>Ladon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

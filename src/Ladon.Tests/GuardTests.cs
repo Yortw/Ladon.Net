@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
@@ -14,6 +14,22 @@ namespace Ladon.Tests
 			{
 				object test = null;
 				test.GuardNull(nameof(test));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentNullException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
+			}
+		}
+
+		[TestMethod]
+		public void Guard_GuardNull_UsesCallerArgumentExpression()
+		{
+			try
+			{
+				object test = null;
+				test.GuardNull();
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentNullException ae)
@@ -43,13 +59,35 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "not allowed";
-				test.GuardEquals(nameof(test), "not allowed");
+				test.GuardEquals("not allowed", nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentException ae)
 			{
 				Assert.AreEqual("test", ae.ParamName);
 			}
+		}
+
+		[TestMethod]
+		public void Guard_GuardEquals_ThrowsOnNullWhenNullForbidden()
+		{
+			try
+			{
+				string test = null;
+				test.GuardEquals(null, nameof(test));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void Guard_GuardEquals_DoesNotThrowOnNotNullWhenNullForbidden()
+		{
+			string test = "test";
+			test.GuardEquals(null, nameof(test));
 		}
 
 		[TestMethod]
@@ -72,5 +110,6 @@ namespace Ladon.Tests
 				Assert.IsTrue(frames.Length < 3);
 			}
 		}
+
 	}
 }

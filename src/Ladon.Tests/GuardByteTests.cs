@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ladon.Tests
@@ -34,7 +34,7 @@ namespace Ladon.Tests
 			try
 			{
 				byte test = 1;
-				test.GuardRange(nameof(test), 5, 10);
+				test.GuardRange(5, 10, nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentOutOfRangeException ae)
@@ -49,7 +49,7 @@ namespace Ladon.Tests
 			try
 			{
 				byte test = 15;
-				test.GuardRange(nameof(test), 5, 10);
+				test.GuardRange(5, 10, nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentOutOfRangeException ae)
@@ -62,7 +62,7 @@ namespace Ladon.Tests
 		public void GuardByte_GuardRange_DoesNotThrowWithinRange()
 		{
 			byte test = 8;
-			Assert.AreEqual(test, test.GuardRange(nameof(test), 5, 10));
+			Assert.AreEqual(test, test.GuardRange(5, 10, nameof(test)));
 		}
 
 	}
