@@ -26,8 +26,12 @@ A lightweight, low overhead, low ceremony, cross platform library for guarding a
 ## Supported Platforms
 Currently;
 
-* .Net Standard 1.0 
-* .Net 4.0+
+* .Net Standard 2.0
+* .Net Standard 2.1
+* .Net 4.5
+* .Net 4.6
+* .Net 5.0
+* .Net 6.0
 
 ## How do I use it?
 

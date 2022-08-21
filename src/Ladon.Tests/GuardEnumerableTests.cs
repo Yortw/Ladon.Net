@@ -46,43 +46,41 @@ namespace Ladon.Tests
 		}
 
 
-
 		[TestMethod]
-		public void GuardEnumerable_GuardNullOrEmptyWithSubproperty_ThrowsOnNull()
+		public void GuardEnumerable_GuardNullOrEmpty_ThrowsOnNullArray()
 		{
 			try
 			{
-				List<string> test = null;
-				test.GuardNullOrEmpty(nameof(test), "Subproperty");
+				string[] test = null;
+				test.GuardNullOrEmpty(nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentNullException ae)
 			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
+				Assert.AreEqual("test", ae.ParamName);
 			}
 		}
 
 		[TestMethod]
-		public void GuardEnumerable_GuardNullOrEmptyWithSubproperty_ThrowsOnEmpty()
+		public void GuardEnumerable_GuardNullOrEmpty_ThrowsOnEmptyArray()
 		{
 			try
 			{
-				List<string> test = new List<string>(0);
-				test.GuardNullOrEmpty(nameof(test), "Subproperty");
+				string[] test = new string[] { };
+				test.GuardNullOrEmpty(nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentException ae)
 			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
+				Assert.AreEqual("test", ae.ParamName);
 			}
 		}
 
 		[TestMethod]
-		public void GuardEnumerable_GuardNullOrEmptyWithSubproperty_DoesNotThrowOnNonEmpty()
+		public void GuardEnumerable_GuardNullOrEmpty_DoesNotThrowOnNonEmptyArray()
 		{
-			List<string> test = new List<string>(1);
-			test.Add("Test");
-			Assert.AreEqual(test, test.GuardNullOrEmpty(nameof(test), "Subproperty"));
+			string[] test = new string[] { "test" };
+			Assert.AreEqual(test, test.GuardNullOrEmpty(nameof(test)));
 		}
 
 	}
