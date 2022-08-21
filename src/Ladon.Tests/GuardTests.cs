@@ -24,6 +24,22 @@ namespace Ladon.Tests
 		}
 
 		[TestMethod]
+		public void Guard_GuardNull_UsesCallerArgumentExpression()
+		{
+			try
+			{
+				object test = null;
+				test.GuardNull();
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentNullException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
+			}
+		}
+
+		[TestMethod]
 		public void Guard_GuardNull_DoesNotThrowOnNonNull()
 		{
 			object test = new object();
@@ -43,13 +59,35 @@ namespace Ladon.Tests
 			try
 			{
 				string test = "not allowed";
-				test.GuardEquals(nameof(test), "not allowed");
+				test.GuardEquals("not allowed", nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentException ae)
 			{
 				Assert.AreEqual("test", ae.ParamName);
 			}
+		}
+
+		[TestMethod]
+		public void Guard_GuardEquals_ThrowsOnNullWhenNullForbidden()
+		{
+			try
+			{
+				string test = null;
+				test.GuardEquals(null, nameof(test));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
+		}
+
+		[TestMethod]
+		public void Guard_GuardEquals_DoesNotThrowOnNotNullWhenNullForbidden()
+		{
+			string test = "test";
+			test.GuardEquals(null, nameof(test));
 		}
 
 		[TestMethod]
@@ -70,52 +108,6 @@ namespace Ladon.Tests
 				var frames = ae.StackTrace.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 				Assert.IsFalse(frames.Where((f) => f.Contains("Ladon.Guard.GuardNull")).Any(), "GuardNull found in stack trace frame, method should have been inlined.");
 				Assert.IsTrue(frames.Length < 3);
-			}
-		}
-
-
-		[TestMethod]
-		public void Guard_GuardNullWithSubproperty_ThrowsOnNull()
-		{
-			try
-			{
-				object test = null;
-				test.GuardNull(nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentNullException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-				System.Diagnostics.Trace.WriteLine(ae.StackTrace);
-			}
-		}
-
-		[TestMethod]
-		public void Guard_GuardNullWithSubproperty_DoesNotThrowOnNonNull()
-		{
-			object test = new object();
-			Assert.AreEqual(test, test.GuardNull(nameof(test), "Subproperty"));
-		}
-
-		[TestMethod]
-		public void Guard_GuardEqualsWithSubproperty_DoesNotThrowOnNonEqual()
-		{
-			string test = "test me";
-			Assert.AreEqual(test, test.GuardEquals(nameof(test), "Subproperty", "not allowed"));
-		}
-
-		[TestMethod]
-		public void Guard_GuardEqualsWithSubproperty_ThrowsOnEquals()
-		{
-			try
-			{
-				string test = "not allowed";
-				test.GuardEquals(nameof(test), "Subproperty", "not allowed");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
 			}
 		}
 

@@ -75,32 +75,32 @@ namespace Ladon.Tests
 
 
 		[TestMethod]
-		public void GuardLong_GuardNegative_ThrowsOnZero()
+		public void GuardLong_GuardNegative_DoesNotThrowOnZero()
 		{
-			try
-			{
-				long test = 0;
-				test.GuardZero(nameof(test));
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentOutOfRangeException ae)
-			{
-				Assert.AreEqual("test", ae.ParamName);
-			}
+			long test = 0;
+			test.GuardNegative(nameof(test));
 		}
 
 		[TestMethod]
 		public void GuardLong_GuardNegative_DoesNotThrowOnPositiveValue()
 		{
 			long test = 1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test)));
+			Assert.AreEqual(test, test.GuardNegative(nameof(test)));
 		}
 
 		[TestMethod]
-		public void GuardLong_GuardNegative_DoesNotThrowOnNegative()
+		public void GuardLong_GuardNegative_ThrowsOnNegative()
 		{
 			long test = -1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test)));
+			try
+			{
+				Assert.AreEqual(test, test.GuardNegative(nameof(test)));
+				Assert.Fail("Did not throw argument null exception");
+			}
+			catch (ArgumentException ae)
+			{
+				Assert.AreEqual("test", ae.ParamName);
+			}
 		}
 
 
@@ -110,7 +110,7 @@ namespace Ladon.Tests
 			try
 			{
 				long test = 1;
-				test.GuardRange(nameof(test), 5, 10);
+				test.GuardRange(5, 10, nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentOutOfRangeException ae)
@@ -125,7 +125,7 @@ namespace Ladon.Tests
 			try
 			{
 				long test = 15;
-				test.GuardRange(nameof(test), 5, 10);
+				test.GuardRange(5, 10, nameof(test));
 				Assert.Fail("Did not throw argument null exception");
 			}
 			catch (ArgumentOutOfRangeException ae)
@@ -138,144 +138,7 @@ namespace Ladon.Tests
 		public void GuardLong_GuardRange_DoesNotThrowWithinRange()
 		{
 			long test = 8;
-			Assert.AreEqual(test, test.GuardRange(nameof(test), 5, 10));
-		}
-
-
-
-		[TestMethod]
-		public void GuardLong_GuardZeroWithSubproperty_ThrowsOnZero()
-		{
-			try
-			{
-				long test = 0;
-				test.GuardZero(nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardZeroWithSubproperty_DoesNotThrowOnNonZero()
-		{
-			long test = 1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test), "Subproperty"));
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardZeroWithSubproperty_DoesNotThrowOnNegative()
-		{
-			long test = -1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test), "Subproperty"));
-		}
-
-
-		[TestMethod]
-		public void GuardLong_GuardZeroOrNegativeWithSubproperty_ThrowsOnZero()
-		{
-			try
-			{
-				long test = 0;
-				test.GuardZeroOrNegative(nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardZeroOrNegativeWithSubproperty_DoesNotThrowOnPositiveValue()
-		{
-			long test = 1;
-			Assert.AreEqual(test, test.GuardZeroOrNegative(nameof(test), "Subproperty"));
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardZeroOrNegativeWithSubproperty_ThrowsOnNegative()
-		{
-			try
-			{
-				long test = -1;
-				test.GuardZeroOrNegative(nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
-
-		[TestMethod]
-		public void GuardLong_GuardNegativeWithSubproperty_ThrowsOnZero()
-		{
-			try
-			{
-				long test = 0;
-				test.GuardZero(nameof(test), "Subproperty");
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentOutOfRangeException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardNegativeWithSubproperty_DoesNotThrowOnPositiveValue()
-		{
-			long test = 1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test), "Subproperty"));
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardNegativeWithSubproperty_DoesNotThrowOnNegative()
-		{
-			long test = -1;
-			Assert.AreEqual(test, test.GuardZero(nameof(test), "Subproperty"));
-		}
-
-
-		[TestMethod]
-		public void GuardLong_GuardRangeWithSubproperty_ThrowsOnBelowMinimum()
-		{
-			try
-			{
-				long test = 1;
-				test.GuardRange(nameof(test), "Subproperty", 5, 10);
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentOutOfRangeException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardRangeWithSubproperty_ThrowsOnOverMaximum()
-		{
-			try
-			{
-				long test = 15;
-				test.GuardRange(nameof(test), "Subproperty", 5, 10);
-				Assert.Fail("Did not throw argument null exception");
-			}
-			catch (ArgumentOutOfRangeException ae)
-			{
-				Assert.AreEqual("test.Subproperty", ae.ParamName);
-			}
-		}
-
-		[TestMethod]
-		public void GuardLong_GuardRangeWithSubproperty_DoesNotThrowWithinRange()
-		{
-			long test = 8;
-			Assert.AreEqual(test, test.GuardRange(nameof(test), "Subproperty", 5, 10));
+			Assert.AreEqual(test, test.GuardRange(5, 10, nameof(test)));
 		}
 
 	}
