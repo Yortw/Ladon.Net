@@ -20,9 +20,29 @@
         <file src="Ladon.NetStandard10\bin\Release\*.pdb" target="lib\netstandard1.0" />
         <file src="Ladon.NetStandard10\bin\Release\*.xml" target="lib\netstandard1.0" />
 
-        <file src="Ladon.Net40\bin\Release\*.dll" target="lib\net40" />
-        <file src="Ladon.Net40\bin\Release\*.pdb" target="lib\net40" />
-        <file src="Ladon.Net40\bin\Release\*.xml" target="lib\net40" />        
+        <file src="Ladon\bin\Release\netstandard2.0\*.dll" target="lib\netstandard2.0" />
+        <file src="Ladon\bin\Release\netstandard2.0\*.pdb" target="lib\netstandard2.0" />
+        <file src="Ladon\bin\Release\netstandard2.0\*.xml" target="lib\netstandard2.0" />
+
+        <file src="Ladon\bin\Release\netstandard2.1\*.dll" target="lib\netstandard2.1" />
+        <file src="Ladon\bin\Release\netstandard2.1\*.pdb" target="lib\netstandard2.1" />
+        <file src="Ladon\bin\Release\netstandard2.1\*.xml" target="lib\netstandard2.1" />
+
+        <file src="Ladon\bin\Release\net45\*.dll" target="lib\net45" />
+        <file src="Ladon\bin\Release\net45\*.pdb" target="lib\net45" />
+        <file src="Ladon\bin\Release\net45\*.xml" target="lib\net45" />
+
+        <file src="Ladon\bin\Release\net48\*.dll" target="lib\net48" />
+        <file src="Ladon\bin\Release\net48\*.pdb" target="lib\net48" />
+        <file src="Ladon\bin\Release\net48\*.xml" target="lib\net48" />
+
+        <file src="Ladon\bin\Release\net5\*.dll" target="lib\net5" />
+        <file src="Ladon\bin\Release\net5\*.pdb" target="lib\net5" />
+        <file src="Ladon\bin\Release\net5\*.xml" target="lib\net5" />
+
+        <file src="Ladon\bin\Release\net6\*.dll" target="lib\net6" />
+        <file src="Ladon\bin\Release\net6\*.pdb" target="lib\net6" />
+        <file src="Ladon\bin\Release\net6\*.xml" target="lib\net6" />
         
         <file src="**\*.cs" target="src" />
     </files>
