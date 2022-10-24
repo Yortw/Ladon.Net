@@ -39,6 +39,12 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Company />
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Title>Ladon.Net</Title>
+		<RepositoryUrl>https://github.com/Yortw/Ladon.Net.git</RepositoryUrl>
+		<PackageReleaseNotes>* Bug fixes
+* Support for caller member express (breaking API changes from v1)
+* Dropped support for .Net 4.0
+* Improved multi-platform solution support (common assembly name)</PackageReleaseNotes>
 	</PropertyGroup>
 
 
